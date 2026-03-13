@@ -1,0 +1,19 @@
+class Solution:
+    def letterCombinations(self, digits: str):
+        if not digits:
+            return []
+        
+        mapping = ["0","1","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"]
+        res = []
+
+        def backtrack(index, path):
+            if index == len(digits):
+                res.append("".join(path))
+                return
+            for char in mapping[int(digits[index])]:
+                path.append(char)
+                backtrack(index+1, path)
+                path.pop()
+
+        backtrack(0, [])
+        return res
